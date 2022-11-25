@@ -1,10 +1,14 @@
 import React from 'react';
-import './Footer.css';
+import './Footer.scss';
 
 function Footer() {
     return (
         <footer>
-            Copyright
+            <div className="links">
+                <a href="#">Contact</a>
+                <a href="#">Conditions générales pdf</a>
+            </div>
+            <p>RIDE 2022 - tout droits réservés</p>
         </footer>
     );
 }

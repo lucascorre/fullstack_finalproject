@@ -1,14 +1,17 @@
 import React from 'react';
-import './Navbar.css';
+import './Navbar.scss';
 
 function Navbar() {
     return (
-        <ul>
-            <li><a href="default.asp">Home</a></li>
-            <li><a href="news.asp">News</a></li>
-            <li><a href="contact.asp">Contact</a></li>
-            <li><a className="active" href="#about">About</a></li>
-        </ul>
+        <div className="navBar">
+            <div className="nameAndLogo">
+                <img className="logo" src="Logo.svg" alt="logo"/>
+                <h1 className="name">RIDE</h1>
+            </div>
+            <div className="links">
+                <button type="button" className="btn">Connexion admin</button>
+            </div>
+        </div>
     );
 }
 
