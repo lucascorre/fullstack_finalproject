@@ -1,20 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Bayon:wght@400&display=swap');
+
 .navBar {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 1px 10px #363636;
+    box-shadow: 0 1px 10px rgba(54, 54, 54, 0.3);
     .nameAndLogo {
         display: flex;
         flex-direction: row;
-        justify-content: start;
-        margin-left: 3px;
+        justify-content: flex-start;
+        margin: 3px;
+        font-family: 'Bayon', serif;
         .logo {
             height: 66px;
             width: 66px;
         }
         .name {
-            margin: 0;
+            margin: 0 0 0 0.3em;
             line-height: 2em;
         }
     }
