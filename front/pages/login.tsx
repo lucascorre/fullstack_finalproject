@@ -1,6 +1,6 @@
 import React from 'react';
 import classes from "./login.module.scss";
-import {Button, TextInput} from "my-lib/dist/cjs";
+import {Button, TextInput} from "@spideai/my-lib/dist/cjs";
 import {useRouter} from "next/router";
 
 export const Login = () => {

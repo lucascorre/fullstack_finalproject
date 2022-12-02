@@ -1,6 +1,6 @@
 import React from 'react';
 import classes from './sign-in.module.scss'
-import {Button, TextInput} from "my-lib/dist/cjs";
+import {Button, TextInput} from "@spideai/my-lib/dist/cjs";
 import DropDown from "../src/components/common/Dropdown/DropDown";
 import {useRouter} from "next/router";
 

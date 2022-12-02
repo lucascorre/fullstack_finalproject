@@ -1,6 +1,9 @@
 {
-  "name": "my-lib",
-  "version": "2.0.1",
+  "name": "@spideai/my-lib",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/spideai"
+  },
+  "version": "3.0.2",
   "description": "A simple template for a custom React component library",
   "scripts": {
     "rollup": "rollup -c",

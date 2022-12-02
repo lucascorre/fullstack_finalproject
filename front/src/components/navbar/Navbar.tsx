@@ -1,8 +1,11 @@
 import React from 'react';
 import classes from './Navbar.module.scss';
-import {Button} from "my-lib/dist/cjs";
+import {Button} from "@spideai/my-lib/dist/cjs";
+import {useRouter} from "next/router";
 
 function Navbar() {
+  const router = useRouter();
+
     return (
         <div className={classes.navBar}>
             <div className={classes.nameAndLogo}>
@@ -10,7 +13,7 @@ function Navbar() {
                 <h1 className={classes.name}>RIDE</h1>
             </div>
             <div className={classes.links}>
-                <Button title="Connexion admin" />
+                <Button onClick={() => {router.push("/login")}} title="Connexion admin" />
             </div>
         </div>
     );

@@ -10,7 +10,7 @@ type ButtonProps = {
 
 const Button = ({title, onClick, type="button"}: ButtonProps) => {
   return(
-		<button className={"button"} type={type} onClick={onClick}>
+		<button className={"button ripple"} type={type} onClick={onClick}>
 			{title}
 		</button>
 	)
