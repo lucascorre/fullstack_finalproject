@@ -1,0 +1,24 @@
+.navBar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 1px 10px #363636;
+    .nameAndLogo {
+        display: flex;
+        flex-direction: row;
+        justify-content: start;
+        margin-left: 3px;
+        .logo {
+            height: 66px;
+            width: 66px;
+        }
+        .name {
+            margin: 0;
+            line-height: 2em;
+        }
+    }
+    .links {
+        margin-right: 9px;
+    }
+}
