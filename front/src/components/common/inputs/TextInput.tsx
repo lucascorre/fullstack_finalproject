@@ -9,7 +9,7 @@ const TextInput = (props: TextInputProps) => {
 	return (
 		<div className={classes.textInputContainer}>
 			<label className={classes.label} htmlFor="input">{ title }</label>
-			<input id="input" title="nom" className={classes.textInput} type={"text"}/>
+			<input id="input" className={classes.textInput} type={"text"}/>
 		</div>
 	)
 };
