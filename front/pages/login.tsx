@@ -1,12 +1,16 @@
 import React from 'react';
-import TextInput from "../src/components/common/inputs/TextInput";
+import classes from "./login.module.scss";
 
 export const Login = () => {
-    return(
-        <div>
-            <TextInput/>
-        </div>
-    );
+  return(
+    <div className={classes.loginPage}>
+      <div className={classes.loginContainer}>
+        <button>retour</button>
+        <h4>CONNEXION</h4>
+        <input/>Identifiant
+        <input/>Mot de passe
+        <button>Connexion</button>
+      </div>
+    </div>
+  );
 }
-
-export default Login;
