@@ -4,6 +4,11 @@
     "My-Lib-Ui": {
       "signature": "e063b9cfef37f1a15ba33d6420289fb9",
       "file": true
+    },
+    "@spideai/my-lib": {
+      "version": "2.0.1",
+      "signature": "6fa15d17652d814f70268d7b48b0fa37",
+      "file": true
     }
   }
 }

@@ -1,0 +1,23 @@
+{
+  "name": "@spideai/my-lib",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/spideai"
+  },
+  "version": "2.0.1",
+  "description": "A simple template for a custom React component library",
+  "scripts": {
+    "rollup": "rollup -c"
+  },
+  "author": "spideai",
+  "license": "ISC",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "files": [
+    "dist"
+  ],
+  "types": "dist/index.d.ts",
+  "dependencies": {
+    "tslib": "^2.4.1"
+  },
+  "yalcSig": "6fa15d17652d814f70268d7b48b0fa37"
+}

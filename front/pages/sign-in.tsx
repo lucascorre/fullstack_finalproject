@@ -2,7 +2,7 @@ import React from 'react';
 import classes from './sign-in.module.scss'
 import TextInput from '../src/components/common/inputs/TextInput';
 import DropDown from "../src/components/common/dropdown/DropDown";
-import Button from "../src/components/common/button/Button";
+import { Button } from "../.yalc/@spideai/my-lib/dist/cjs";
 
 export const SignIn = () => {
     return(
@@ -45,7 +45,7 @@ export const SignIn = () => {
                             <label htmlFor="attest">j’atteste que je possède un permis de conduire valide.</label>
                         </div>
                         <div className={classes.submitButtonContainer}>
-                            <Button title="Demander mon inscription" />
+                            <Button   label="coucou"/>
                         </div>
                     </form>
                 </div>
