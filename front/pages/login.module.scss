@@ -1,9 +1,12 @@
 .loginPage {
   display: flex;
   justify-content: center;
+  height: 100%;
+  align-items: center;
   .loginContainer {
+    padding: 0 2rem 2rem;
     background-color: white;
-    width: 40em;
+    width: 30em;
     h2 {
       color: #C00000;
       text-align: left;
@@ -14,7 +17,6 @@
       flex-direction: column;
       justify-content: flex-end;
       align-items: center;
-      width: 70%;
       font-size: 18px;
       margin: 0;
       button {
@@ -23,4 +25,30 @@
       }
     }
   }
+}
+
+.backContainer {
+  position: absolute;
+  transform: translate(-1rem, -2.5rem);
+  padding: .2rem;
+  cursor: pointer;
+  border-radius: .5rem;
+}
+
+.backContainer:active {
+  background-color: #727272;
+}
+
+/* Ripple effect */
+.ripple {
+  background-position: center;
+  transition: background 0.8s;
+}
+.ripple:hover {
+  background: radial-gradient(circle, transparent 1%, rgba(154, 28, 28, 0.21) 1%) center/15000%;
+}
+.ripple:active {
+  background-color: rgba(154, 28, 28, 0.13);
+  background-size: 100%;
+  transition: background 0s;
 }

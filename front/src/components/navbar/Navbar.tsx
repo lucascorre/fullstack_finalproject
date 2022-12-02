@@ -1,6 +1,6 @@
 import React from 'react';
 import classes from './Navbar.module.scss';
-import {Button} from "my-lib/dist/esm";
+import {Button} from "my-lib/dist/cjs";
 
 function Navbar() {
     return (

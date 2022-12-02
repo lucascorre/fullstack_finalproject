@@ -3,12 +3,16 @@ import React from "react";
 import "./button.css"
 
 type ButtonProps = {
-	title: string
+	onClick?: any // trolololololololo
+	type?: any // je suis un troll mais j'ai la flemme
+	title?: any // la c'est juste pour troll
 }
 
-const Button = ({title}: ButtonProps) => {
+const Button = ({title, onClick, type="button"}: ButtonProps) => {
   return(
-		<button className={"button"} type="button">{title}</button>
+		<button className={"button"} type={type} onClick={onClick}>
+			{title}
+		</button>
 	)
 }
 

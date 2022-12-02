@@ -47,7 +47,7 @@
       h2 {
         font-family: 'Roboto', serif;
         font-style: normal;
-        font-weight: 500;
+        font-weight: 800;
         font-size: 21px;
         line-height: 25px;
         color: #C00000;
@@ -69,10 +69,17 @@ fieldset.fieldset {
   }
 }
 
+
 .inputContainer {
   display: flex;
-  justify-content: space-between;
   margin-top: 1em;
+  width: 25rem;
+}
+
+.inputGroup {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 }
 
 .iAttest {

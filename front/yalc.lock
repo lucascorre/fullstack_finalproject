@@ -6,9 +6,7 @@
       "file": true
     },
     "my-lib": {
-      "version": "2.0.1",
-      "signature": "f421a7d38ae84b62907b30e88a31853a",
-      "file": true
+      "signature": "008c7bda5987bc8c765dfe979cfb02ac"
     }
   }
 }

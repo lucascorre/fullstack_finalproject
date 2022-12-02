@@ -1,7 +1,9 @@
 /// <reference types="react" />
 import "./button.css";
 type ButtonProps = {
-    title: string;
+    onClick?: any;
+    type?: any;
+    title?: any;
 };
-declare const Button: ({ title }: ButtonProps) => JSX.Element;
+declare const Button: ({ title, onClick, type }: ButtonProps) => JSX.Element;
 export default Button;

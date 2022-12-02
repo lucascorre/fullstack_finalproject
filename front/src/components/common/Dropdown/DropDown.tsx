@@ -1,5 +1,5 @@
 
-import "./DropDown.css"
+import classes from "./DropDown.module.scss"
 import {useState} from "react";
 import React from "react";
 
@@ -17,11 +17,11 @@ const DropDown = (props: DropDownProps) => {
         setValue(event.currentTarget.value);
     }
     return (
-        <div className={"textInputContainer"}>
-            <label className={"label"} htmlFor={id}>{label}</label>
+        <div className={classes.textInputContainer}>
+            <label className={classes.label} htmlFor={id}>{label}</label>
             <select
                 id={id}
-                className={`${"selectInput"} ${value === placeholder ? "placeholder": "selected" }`}
+                className={`${classes.selectInput} ${value === placeholder ? classes.placeholder: classes.selected }`}
                 onChange={onSelectChange}
                 value={value}
             >

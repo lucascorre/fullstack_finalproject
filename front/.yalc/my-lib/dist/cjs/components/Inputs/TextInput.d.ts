@@ -1,5 +1,5 @@
 /// <reference types="react" />
-import "./TextInput.css";
+import "./textinput.css";
 type TextInputProps = {
     title: string;
 };

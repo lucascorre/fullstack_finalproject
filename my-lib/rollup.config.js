@@ -3,6 +3,7 @@ import commonjs from "@rollup/plugin-commonjs";
 import typescript from "@rollup/plugin-typescript";
 import dts from "rollup-plugin-dts";
 import scss from "rollup-plugin-scss";
+import css from "rollup-plugin-import-css"
 
 const packageJson = require("./package.json");
 
@@ -16,17 +17,17 @@ export default [
                 sourcemap: true,
                 assetFileNames: '[name][extname]'
             },
-            {
-                file: packageJson.module,
-                format: "esm",
-                sourcemap: true,
-                assetFileNames: '[name][extname]'
-            },
+            // {
+            //     file: packageJson.module,
+            //     format: "esm",
+            //     sourcemap: true,
+            //     assetFileNames: '[name][extname]'
+            // },
         ],
         plugins: [
             resolve(),
             commonjs(),
-            scss(),
+            css(),
             typescript({ tsconfig: "./tsconfig.json" }),
         ],
     },

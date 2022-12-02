@@ -1,0 +1,4 @@
+
+> my-lib@2.0.1 rollup
+> rollup -c "publish"
+

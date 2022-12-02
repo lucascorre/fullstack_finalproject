@@ -1,8 +1,11 @@
 import React from 'react';
 import classes from './sign-in.module.scss'
-import {Button, DropDown, TextInput} from "my-lib/dist/esm";
+import {Button, TextInput} from "my-lib/dist/cjs";
+import DropDown from "../src/components/common/Dropdown/DropDown";
+import {useRouter} from "next/router";
 
 export const SignIn = () => {
+    const router = useRouter()
     return(
         <div className={classes.signInPage}>
             <div className={classes.descriptionContainer}>
@@ -14,7 +17,7 @@ export const SignIn = () => {
             </div>
             <div className={classes.signInFormContainer}>
                 <div className={classes.form}>
-                    <h2>INSCRIPTION</h2>
+                    <h2 className={classes.title}>INSCRIPTION</h2>
                     <form onChange={() => {}}>
                         <fieldset className={classes.fieldset}>
                             <legend>Je suis:</legend>
@@ -27,13 +30,21 @@ export const SignIn = () => {
                                 <label htmlFor="private">un particulier</label>
                             </div>
                         </fieldset>
-                        <div className={classes.inputContainer}>
-                            <TextInput title={"Nom"}/>
-                            <TextInput title={"Prénom"}/>
+                        <div className={classes.inputGroup}>
+                            <div className={classes.inputContainer}>
+                                <TextInput title={"Nom"}/>
+                            </div>
+                            <div className={classes.inputContainer}>
+                                <TextInput title={"Prénom"}/>
+                            </div>
                         </div>
-                        <div className={classes.inputContainer}>
-                            <TextInput title={"Email"}/>
-                            <TextInput title={"Numéro de téléphone"}/>
+                        <div className={classes.inputGroup}>
+                            <div className={classes.inputContainer}>
+                                <TextInput title={"Email"}/>
+                            </div>
+                            <div className={classes.inputContainer}>
+                                <TextInput title={"Numéro de téléphone"}/>
+                            </div>
                         </div>
                         <div className={classes.inputContainer}>
                             <DropDown id={"selectNationalite"} options={["pouette", "prout", "plouf"]} label={"Nationnalité"} placeholder={"Sélectionner une valeur"}/>
@@ -43,7 +54,7 @@ export const SignIn = () => {
                             <label htmlFor="attest">j’atteste que je possède un permis de conduire valide.</label>
                         </div>
                         <div className={classes.submitButtonContainer}>
-                            <Button title="Demander mon inscription" />
+                            <Button title="Demander mon inscription" onClick={() => router.push("/sign-in/ok")} />
                         </div>
                     </form>
                 </div>

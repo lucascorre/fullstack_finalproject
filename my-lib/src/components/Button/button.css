@@ -1,10 +1,14 @@
 .button {
   height: 44px;
-  background: #C00000;
+  background-color: #C00000;
   padding: 12px 16px;
-  //font-weight: 700;
   font-size: 16px;
   line-height: 20px;
   color: #ffffff;
   border: none;
+  cursor: pointer;
+}
+
+.button:active {
+  background-color: #A10000;
 }

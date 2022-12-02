@@ -1,5 +1,5 @@
 import React from "react";
-import "./TextInput.css"
+import "./textinput.css"
 
 type TextInputProps = {
 	title: string
@@ -10,7 +10,7 @@ const TextInput = (props: TextInputProps) => {
 	return (
 		<div className={"textInputContainer"}>
 			<label className={"label"} htmlFor="input">{ title }</label>
-			<input id="input" title="nom" className={"textInput"} type={"text"}/>
+			<input id="input" className={"textInput"} type={"text"}/>
 		</div>
 	)
 };
