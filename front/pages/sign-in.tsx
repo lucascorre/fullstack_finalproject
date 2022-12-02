@@ -1,5 +1,7 @@
 import React from 'react';
 import classes from './sign-in.module.scss';
+import {Button} from "@spideai/my-lib/dist/cjs";
+
 
 export const SignIn = () => {
     return(
@@ -24,6 +26,9 @@ export const SignIn = () => {
                             <div>
                                 <input type="radio" id="private" name="iAm" value="private"/>
                                 <label htmlFor="private">un particulier</label>
+                            </div>
+                            <div>
+                                <Button label={"coucou"} />
                             </div>
                         </fieldset>
                     </form>

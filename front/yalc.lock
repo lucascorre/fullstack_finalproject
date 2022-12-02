@@ -1,0 +1,9 @@
+{
+  "version": "v1",
+  "packages": {
+    "My-Lib-Ui": {
+      "signature": "e063b9cfef37f1a15ba33d6420289fb9",
+      "file": true
+    }
+  }
+}

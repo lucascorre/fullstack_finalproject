@@ -7,8 +7,12 @@ export const Login = () => {
       <div className={classes.loginContainer}>
         <button>retour</button>
         <h4>CONNEXION</h4>
-        <input/>Identifiant
-        <input/>Mot de passe
+        <input/>
+        <label>
+          Identifiant
+        </label>
+        <input/>
+        Mot de passe
         <button>Connexion</button>
       </div>
     </div>
