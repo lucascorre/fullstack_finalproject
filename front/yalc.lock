@@ -5,9 +5,9 @@
       "signature": "e063b9cfef37f1a15ba33d6420289fb9",
       "file": true
     },
-    "@spideai/my-lib": {
+    "my-lib": {
       "version": "2.0.1",
-      "signature": "41ad64cf1a3a932d816533f06dfbb478",
+      "signature": "f421a7d38ae84b62907b30e88a31853a",
       "file": true
     }
   }

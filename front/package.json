@@ -9,13 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@spideai/my-lib": "file:.yalc/@spideai/my-lib",
     "@types/node": "18.11.9",
     "@types/react": "18.0.25",
     "@types/react-dom": "18.0.9",
     "eslint": "8.28.0",
     "eslint-config-next": "13.0.5",
-    "my-lib-ui": "file:.yalc/my-lib-ui",
+    "my-lib": "file:.yalc/my-lib",
     "next": "13.0.5",
     "react": "18.2.0",
     "react-dom": "18.2.0",

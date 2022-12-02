@@ -1,8 +1,5 @@
 {
-  "name": "@spideai/my-lib",
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/spideai"
-  },
+  "name": "my-lib",
   "version": "2.0.1",
   "description": "A simple template for a custom React component library",
   "scripts": {
@@ -19,5 +16,5 @@
   "dependencies": {
     "tslib": "^2.4.1"
   },
-  "yalcSig": "41ad64cf1a3a932d816533f06dfbb478"
+  "yalcSig": "f421a7d38ae84b62907b30e88a31853a"
 }
