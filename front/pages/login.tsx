@@ -6,6 +6,9 @@ export const Login = () => {
     <div className={classes.loginPage}>
       <div className={classes.loginContainer}>
         <h2>CONNEXION</h2>
+          <form>
+
+          </form>
       </div>
     </div>
   );

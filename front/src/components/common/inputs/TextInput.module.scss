@@ -1,0 +1,28 @@
+.textInputContainer {
+  width: 30rem;
+  color: #727272;
+  margin: 0.5em;
+  &:focus-within {
+    color: #2D2D2D;
+  }
+  .textInput {
+    width: 100%;
+    height: 2em;
+    padding: 1.5rem 0 0 0.5em;
+    //padding: 1.5rem 1rem 1rem;
+    background-color: #F9F9F9;
+    border: none;
+    border-bottom: 2px solid white;
+    &:focus {
+      border: none;
+      border-bottom: 2px solid #000000;
+      outline: none;
+    }
+  }
+  label.label {
+    position: absolute;
+    font-weight: 600;
+    transform: translate(1rem, .5rem);
+    font-size: 13px;
+  }
+}
