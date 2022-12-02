@@ -1,0 +1,35 @@
+{
+  "name": "my-lib-ui",
+  "version": "1.0.0",
+  "description": "pouette",
+  "author": "spideai",
+  "license": "MIT",
+  "repository": "spideai/my-lib-ui",
+  "main": "dist/index.js",
+  "module": "dist/index.modern.js",
+  "source": "src/index.tsx",
+  "engines": {
+    "node": ">=10"
+  },
+  "scripts": {
+    "build": "microbundle-crl --no-compress --format modern,cjs",
+    "start": "microbundle-crl watch --no-compress --format modern,cjs",
+    "test": "run-s test:unit test:lint test:build",
+    "test:build": "run-s build",
+    "test:lint": "eslint .",
+    "test:unit": "cross-env CI=1 react-scripts test --env=jsdom",
+    "test:watch": "react-scripts test --env=jsdom",
+    "predeploy": "cd example && npm install && npm run build",
+    "deploy": "gh-pages -d example/build"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0"
+  },
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "saas": "^1.0.0"
+  },
+  "yalcSig": "e063b9cfef37f1a15ba33d6420289fb9"
+}

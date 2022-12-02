@@ -1,6 +1,7 @@
 /// <reference types="react" />
-export interface ButtonProps {
-    label: string;
-}
-declare const Button: (props: ButtonProps) => JSX.Element;
+import "./button.css";
+type ButtonProps = {
+    title: string;
+};
+declare const Button: ({ title }: ButtonProps) => JSX.Element;
 export default Button;

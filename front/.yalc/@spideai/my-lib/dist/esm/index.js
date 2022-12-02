@@ -2456,9 +2456,29 @@ if (process.env.NODE_ENV === 'production') {
 
 var React = react.exports;
 
-const Button = (props) => {
-    return React.createElement("button", null, props.label);
+const Button = ({ title }) => {
+    return (React.createElement("button", { className: "button", type: "button" }, title));
 };
 
-export { Button };
+const TextInput = (props) => {
+    const { title } = props;
+    return (React.createElement("div", { className: "textInputContainer" },
+        React.createElement("label", { className: "label", htmlFor: "input" }, title),
+        React.createElement("input", { id: "input", title: "nom", className: "textInput", type: "text" })));
+};
+
+const DropDown = (props) => {
+    const { id, options, label, placeholder } = props;
+    const [value, setValue] = react.exports.useState(placeholder);
+    const onSelectChange = (event) => {
+        setValue(event.currentTarget.value);
+    };
+    return (React.createElement("div", { className: "textInputContainer" },
+        React.createElement("label", { className: "label", htmlFor: id }, label),
+        React.createElement("select", { id: id, className: `${"selectInput"} ${value === placeholder ? "placeholder" : "selected"}`, onChange: onSelectChange, value: value },
+            React.createElement("option", { hidden: true }, placeholder),
+            options.map((option, key) => (React.createElement("option", { key: key, value: option }, option))))));
+};
+
+export { Button, DropDown, TextInput };
 //# sourceMappingURL=index.js.map
