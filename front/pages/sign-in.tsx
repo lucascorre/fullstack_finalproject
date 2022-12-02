@@ -1,7 +1,6 @@
 import React from 'react';
 import classes from './sign-in.module.scss'
-import TextInput from '../../my-lib/src/components/Inputs/TextInput';
-import {Button} from "@spideai/my-lib/dist/esm";
+import {Button, DropDown, TextInput} from "my-lib/dist/esm";
 
 export const SignIn = () => {
     return(
@@ -44,7 +43,7 @@ export const SignIn = () => {
                             <label htmlFor="attest">j’atteste que je possède un permis de conduire valide.</label>
                         </div>
                         <div className={classes.submitButtonContainer}>
-                            <Button   label={"coucou"}/>
+                            <Button title="Demander mon inscription" />
                         </div>
                     </form>
                 </div>
