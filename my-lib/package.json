@@ -7,15 +7,27 @@
   "description": "A simple template for a custom React component library",
   "scripts": {
     "rollup": "rollup -c",
-    "doom": "npm run rollup ; yalc publish ; cd ../front ; yalc link my-lib ; cd ../my-lib"
+    "doom": "npm run rollup ; yalc publish ; cd ../front ; yalc link my-lib ; cd ../my-lib",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "author": "spideai",
   "license": "ISC",
   "devDependencies": {
+    "@babel/core": "^7.20.5",
     "@rollup/plugin-commonjs": "^21.0.1",
     "@rollup/plugin-node-resolve": "^13.0.6",
     "@rollup/plugin-typescript": "^8.3.0",
+    "@storybook/addon-actions": "^6.5.14",
+    "@storybook/addon-essentials": "^6.5.14",
+    "@storybook/addon-interactions": "^6.5.14",
+    "@storybook/addon-links": "^6.5.14",
+    "@storybook/builder-webpack4": "^6.5.14",
+    "@storybook/manager-webpack4": "^6.5.14",
+    "@storybook/react": "^6.5.14",
+    "@storybook/testing-library": "^0.0.13",
     "@types/react": "^17.0.34",
+    "babel-loader": "^8.3.0",
     "react": "^17.0.2",
     "rollup": "^2.60.0",
     "rollup-plugin-dts": "^4.0.1",
