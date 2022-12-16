@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/api/admin', name: 'app_admin_api')]
 class AdminApiController extends AbstractController
 {
-    #[Route('/', name: 'app_admin_api_index')]
+    #[Route('/', name: '_index')]
     public function index(): Response
     {
         $admin = $this->getUser();

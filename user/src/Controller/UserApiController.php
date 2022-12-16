@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 #[Route('/api/user', name: 'app_user_api')]
 class UserApiController extends AbstractController
 {
-    #[Route('/', name: 'app_user_api_index')]
+    #[Route('/', name: '_index')]
     public function index(): Response
     {
         $user = $this->getUser();
@@ -23,17 +23,13 @@ class UserApiController extends AbstractController
         );
     }
 
-    #[Route('/check_role', name: 'app_user_api_check_role', methods: "POST")]
-    public function checkRole(Requestuest $request, SerializerInterface $serializer): JsonResponse
+    #[Route('/check-role', name: '_check_role', methods: "POST")]
+    public function checkRole(Request $request, SerializerInterface $serializer): JsonResponse
     {
-        $var = $request->getContent();
-        $json = $serializer->decode($var, 'json');
-        $role = $json["role"];
-        if (!$role) {
-            return new JsonResponse([
-                'message' => 'Wrong role'
-            ], 400);
-        }
-        return new JsonResponse($role, Response::HTTP_OK, [], true);
+        $user = $this->getUser();
+        $role = json_decode($request->getContent(), true)['role'];
+        if (!in_array($role, $user->getRoles())) {
+            return new JsonResponse(['hasRole' => false], 400);
+        } else { return new JsonResponse(['hasRole' => true], Response::HTTP_OK, []); }
     }
 }
