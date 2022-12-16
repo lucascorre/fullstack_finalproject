@@ -6,13 +6,16 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+#[Route('/api/admin', name: 'app_admin_api')]
 class AdminApiController extends AbstractController
 {
-    #[Route('/api/admin', name: 'app_admin_api')]
+    #[Route('/', name: 'app_admin_api_index')]
     public function index(): Response
     {
-        return $this->render('admin_api/index.html.twig', [
-            'controller_name' => 'AdminApiController',
-        ]);
+        $admin = $this->getUser();
+        return $this->json([
+                'user' => $admin->getUserIdentifier(),
+                'roles' => $admin->getRoles()]
+        );
     }
 }
