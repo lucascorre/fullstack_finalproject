@@ -42,25 +42,39 @@ class AdminApiController extends AbstractController
     }
 
     #[Route('/inscription/validate-user/{id}', name: '_validate_user', methods: "POST")]
-    public function validateUser(EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher, $id=null): JsonResponse
+    public function validateUser(EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher, FutureUser $futureUser ): JsonResponse
     {
         $response = new JsonResponse();
-        if ($id) {
-            $futureUser = $entityManager->getRepository(FutureUser::class)->findOneBy(['id' => $id]);
-            if ($futureUser instanceof FutureUser) {
-                $futureUser->setValidate(true);
-                $entityManager->persist($futureUser);
-                $user = new User();
-                $user
-                    ->setEmail($futureUser->getEmail())
-                    ->setPassword($passwordHasher->hashPassword($user, 'password'))
-                    ->setUserInfo($futureUser)
-                ;
-                $entityManager->persist($user);
-                $entityManager->flush();
-                $response->setData(["status" => "success", "message" => "User validated"]);
-            } else { $response->setData(["status" => "error", "message" => "User not found"]); }
-        } else { $response->setData(["status" => "error", "message" => "Missing Parameters"]); }
+        if (!$futureUser->isValidate()) {
+            $futureUser->setValidate(true);
+            $entityManager->persist($futureUser);
+            $user = new User();
+            $user
+                ->setEmail($futureUser->getEmail())
+                ->setPassword($passwordHasher->hashPassword($user, 'password'))
+                ->setUserInfo($futureUser)
+            ;
+            $entityManager->persist($user);
+            $entityManager->flush();
+            $response->setData(["status" => "success", "message" => "User validated"]);
+        } else { $response->setData(["status" => "error", "message" => "User already validated"]); }
         return $response;
+
+//        if ($id) {
+//            $futureUser = $entityManager->getRepository(FutureUser::class)->findOneBy(['id' => $id]);
+//            if ($futureUser instanceof FutureUser) {
+//                $futureUser->setValidate(true);
+//                $entityManager->persist($futureUser);
+//                $user = new User();
+//                $user
+//                    ->setEmail($futureUser->getEmail())
+//                    ->setPassword($passwordHasher->hashPassword($user, 'password'))
+//                    ->setUserInfo($futureUser)
+//                ;
+//                $entityManager->persist($user);
+//                $entityManager->flush();
+//                $response->setData(["status" => "success", "message" => "User validated"]);
+//            } else { $response->setData(["status" => "error", "message" => "User not found"]); }
+//        } else { $response->setData(["status" => "error", "message" => "Missing Parameters"]); }
     }
 }
