@@ -16,6 +16,8 @@ app.use('/api/.user', function (req, res, next) {
   res.sendStatus(401);
 });
 
+// PUBLIC ROUTES
+
 app.get("/api", (_, res) => {
   res.send("Hello API");
 });
@@ -27,22 +29,23 @@ app.get("/api/hello", (req, res) => {
 });
 
 app.post("/api/login", (req, res) => {
-  // res.send(req.body)
   axios.post("http://nginx/api/login_check", req.body).then((onfulfilled) => {
     res.send(onfulfilled.data);
   }).catch(e => res.send(e))
 });
 
-app.get("/api/.user/user", (req, res) => {
-  const bearer = req.header('Authorization');
-  axios.get("http://nginx/api/user", {headers: {'Authorization': bearer}}).then((onfulfilled) => {
+app.post("/api/inscription", (req, res) => {
+  axios.post("http://nginx/api/inscription", req.body).then((onfulfilled) => {
     res.send(onfulfilled.data);
   }).catch(e => res.send(e))
 });
+// ---------------------------------------------------------------------------------------------------------------------
 
-app.get("/api/.user/admin", (req, res) => {
+// USER ROUTES
+
+app.get("/api/.user/user", (req, res) => {
   const bearer = req.header('Authorization');
-  axios.get("http://nginx/api/admin", {headers: {'Authorization': bearer}}).then((onfulfilled) => {
+  axios.get("http://nginx/api/user", {headers: {'Authorization': bearer}}).then((onfulfilled) => {
     res.send(onfulfilled.data);
   }).catch(e => res.send(e))
 });
@@ -53,6 +56,39 @@ app.post("/api/.user/check-role", (req, res) => {
     res.send(onfulfilled.data);
   }).catch(e => res.send(e))
 });
+// ---------------------------------------------------------------------------------------------------------------------
+
+// ADMIN ROUTES
+
+app.get("/api/.user/admin", (req, res) => {
+  const bearer = req.header('Authorization');
+  axios.get("http://nginx/api/admin", {headers: {'Authorization': bearer}}).then((onfulfilled) => {
+    res.send(onfulfilled.data);
+  }).catch(e => res.send(e))
+});
+
+app.get("/api/.user/admin/users", (req, res) => {
+  const bearer = req.header('Authorization');
+  axios.get("http://nginx/api/admin/users", {headers: {'Authorization': bearer}}).then((onfulfilled) => {
+    res.send(onfulfilled.data);
+  }).catch(e => res.send(e))
+});
+
+app.get("/api/.user/admin/future-users", (req, res) => {
+  const bearer = req.header('Authorization');
+  axios.get("http://nginx/api/admin/future-users", {headers: {'Authorization': bearer}}).then((onfulfilled) => {
+    res.send(onfulfilled.data);
+  }).catch(e => res.send(e))
+});
+
+app.post("/api/.user/admin/validate-users/:id", (req, res) => {
+  console.log(req.params.id)
+  const bearer = req.header('Authorization');
+  axios.post(`http://nginx/api/admin/inscription/validate-user/${req.params.id}`, {},{headers: {'Authorization': bearer}}).then((onfulfilled) => {
+    res.send(onfulfilled.data);
+  }).catch(e => res.send(e))
+});
+// ---------------------------------------------------------------------------------------------------------------------
 
 app.listen(port, () => {
   return console.log(`Express is listening at http://localhost:${port}`);

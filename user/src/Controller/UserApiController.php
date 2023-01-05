@@ -24,7 +24,7 @@ class UserApiController extends AbstractController
     }
 
     #[Route('/check-role', name: '_check_role', methods: "POST")]
-    public function checkRole(Request $request, SerializerInterface $serializer): JsonResponse
+    public function checkRole(Request $request): JsonResponse
     {
         $user = $this->getUser();
         $role = json_decode($request->getContent(), true)['role'];
