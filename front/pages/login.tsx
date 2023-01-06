@@ -1,10 +1,20 @@
-import React from 'react';
+import React, {useContext, useState} from 'react';
 import classes from "./login.module.scss";
 import {Button, TextInput} from "@spideai/my-lib/dist/cjs";
 import {useRouter} from "next/router";
+import {AuthenticationContext} from "../src/context/AuthenticationContext";
 
 export const Login = () => {
     const router = useRouter()
+    const {jwt, onLogin} = useContext(AuthenticationContext)
+
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+
+    const onFormSubmit = () => {
+        onLogin({username: email, password: password})
+    }
+
     return (
         <div className={classes.loginPage}>
             <div className={classes.loginContainer}>
@@ -17,9 +27,9 @@ export const Login = () => {
                 <h2>CONNEXION</h2>
                 <div className={classes.form}>
                     <form>
-                        <TextInput title={"Identifiant"}/>
-                        <TextInput title={"Mot de passe"}/>
-                        <Button title={"Connexion"}/>
+                        <TextInput title={"Identifiant"} onChange={(e) => {setEmail(e.currentTarget.value)}}/>
+                        <TextInput title={"Mot de passe"} onChange={(e) => {setPassword(e.currentTarget.value)}}/>
+                        <Button title={"Connexion"} onClick={onFormSubmit}/>
                     </form>
                 </div>
             </div>

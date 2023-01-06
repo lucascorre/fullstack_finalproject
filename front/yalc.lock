@@ -7,6 +7,9 @@
     },
     "my-lib": {
       "signature": "008c7bda5987bc8c765dfe979cfb02ac"
+    },
+    "@spideai/my-lib": {
+      "signature": "6652756d34910f6f7ba6a5cc80565204"
     }
   }
 }

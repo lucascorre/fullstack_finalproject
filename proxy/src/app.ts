@@ -1,9 +1,11 @@
 import express from "express";
 import axios from "axios";
 import bodyParser from "body-parser";
+import cors from "cors";
 
 const app = express();
 const port = 8000;
+app.use(cors())
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));

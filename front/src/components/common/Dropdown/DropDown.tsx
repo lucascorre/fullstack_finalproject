@@ -1,20 +1,22 @@
-
 import classes from "./DropDown.module.scss"
 import {useState} from "react";
 import React from "react";
 
 type DropDownProps = {
     id: string
-    options: string[],
-    label: string,
+    options: string[]
+    label: string
     placeholder: string
+    changeNationality: (nationality: string) => void
 }
 
 const DropDown = (props: DropDownProps) => {
-    const { id, options, label, placeholder } = props;
+    const { id, options, label, placeholder, changeNationality } = props;
     const [value, setValue] = useState(placeholder);
     const onSelectChange = (event: any) => {
-        setValue(event.currentTarget.value);
+        const newValue = event.currentTarget.value;
+        setValue(newValue);
+        changeNationality(newValue);
     }
     return (
         <div className={classes.textInputContainer}>

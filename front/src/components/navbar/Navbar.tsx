@@ -1,7 +1,7 @@
 import React from 'react';
 import classes from './Navbar.module.scss';
-import {Button} from "@spideai/my-lib/dist/cjs";
 import {useRouter} from "next/router";
+import {Button} from "../../../.yalc/my-lib/dist/cjs";
 
 function Navbar() {
   const router = useRouter();

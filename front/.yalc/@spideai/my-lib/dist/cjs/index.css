@@ -1,0 +1,61 @@
+.button {
+  height: 44px;
+  background-color: #C00000;
+  padding: 12px 16px;
+  font-size: 16px;
+  line-height: 20px;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+}
+
+.button:active {
+  background-color: #A10000;
+}
+
+/* Ripple effect */
+.ripple {
+  background-position: center;
+  transition: background 0.8s;
+}
+.ripple:hover {
+  background: #C00000 radial-gradient(circle, transparent 1%, #C00000 1%) center/15000%;
+}
+.ripple:active {
+  background-color: rgba(154, 28, 28, 0.13);
+  background-size: 100%;
+  transition: background 0s;
+}
+
+.textInputContainer.focus-within {
+  color: #2D2D2D;
+}
+
+.textInputContainer {
+  width: 100%;
+  color: #727272;
+  margin: 0.5em;
+}
+
+input.textInput {
+  width: 100%;
+  height: 2em;
+  padding: 1.5rem 0 0 0.5em;
+  background-color: #F9F9F9;
+  border: none;
+  border-bottom: 2px solid white;
+  color: #C00000;
+}
+
+input.textInput:focus {
+  border: none;
+  border-bottom: 2px solid #000000;
+  outline: none;
+}
+
+label.label {
+  position: absolute;
+  font-weight: 600;
+  transform: translate(1rem, .5rem);
+  font-size: 13px;
+}

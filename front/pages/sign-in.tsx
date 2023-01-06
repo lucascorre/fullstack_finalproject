@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import classes from './sign-in.module.scss'
 import {Button, TextInput} from "@spideai/my-lib/dist/cjs";
 import DropDown from "../src/components/common/Dropdown/DropDown";
@@ -6,6 +6,31 @@ import {useRouter} from "next/router";
 
 export const SignIn = () => {
     const router = useRouter()
+
+    const [name, setName] = useState("")
+    const [lastName, setLastName] = useState("")
+    const [email, setEmail] = useState("")
+    const [phone, setPhone] = useState("")
+    const [nationality, setNationality] = useState("")
+
+    const onFormSubmit = () => {
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                name: name,
+                lastname: lastName,
+                email: email,
+                phone: phone,
+                nationality: nationality
+            })
+        };
+        fetch('http://localhost:8000/api/inscription', requestOptions)
+            .then(response => response.json())
+            .then(data => { console.log(data) })
+            .then(() => router.push('sign-in/ok'))
+    }
+
     return(
         <div className={classes.signInPage}>
             <div className={classes.descriptionContainer}>
@@ -32,29 +57,35 @@ export const SignIn = () => {
                         </fieldset>
                         <div className={classes.inputGroup}>
                             <div className={classes.inputContainer}>
-                                <TextInput title={"Nom"}/>
+                                <TextInput title={"Nom"} onChange={(e) => setLastName(e.currentTarget.value)}/>
                             </div>
                             <div className={classes.inputContainer}>
-                                <TextInput title={"Prénom"}/>
+                                <TextInput title={"Prénom"} onChange={(e) => setName(e.currentTarget.value)}/>
                             </div>
                         </div>
                         <div className={classes.inputGroup}>
                             <div className={classes.inputContainer}>
-                                <TextInput title={"Email"}/>
+                                <TextInput title={"Email"} onChange={(e) => setEmail(e.currentTarget.value)}/>
                             </div>
                             <div className={classes.inputContainer}>
-                                <TextInput title={"Numéro de téléphone"}/>
+                                <TextInput title={"Numéro de téléphone"} onChange={(e) => setPhone(e.currentTarget.value)}/>
                             </div>
                         </div>
                         <div className={classes.inputContainer}>
-                            <DropDown id={"selectNationalite"} options={["pouette", "prout", "plouf"]} label={"Nationnalité"} placeholder={"Sélectionner une valeur"}/>
+                            <DropDown
+                                id={"selectNationalite"}
+                                options={["pouette", "prout", "plouf"]}
+                                label={"Nationalité"}
+                                placeholder={"Sélectionner une valeur"}
+                                changeNationality={setNationality}
+                            />
                         </div>
                         <div className={classes.iAttest}>
                             <input type="checkbox" id="attest" name="attest"/>
                             <label htmlFor="attest">j’atteste que je possède un permis de conduire valide.</label>
                         </div>
                         <div className={classes.submitButtonContainer}>
-                            <Button title="Demander mon inscription" onClick={() => router.push("/sign-in/ok")} />
+                            <Button title="Demander mon inscription" onClick={onFormSubmit} />
                         </div>
                     </form>
                 </div>
