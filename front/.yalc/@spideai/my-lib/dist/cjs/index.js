@@ -2460,8 +2460,9 @@ if (process.env.NODE_ENV === 'production') {
 
 var React = react.exports;
 
-const Button = ({ title, onClick, type = "button" }) => {
-    return (React.createElement("button", { className: "button ripple", type: type, onClick: onClick }, title));
+const Button = ({ title, onClick, type = "button", disabled }) => {
+    console.log(disabled);
+    return (React.createElement("button", { className: "button ripple", type: type, onClick: onClick, disabled: disabled }, title));
 };
 
 const TextInput = (props) => {

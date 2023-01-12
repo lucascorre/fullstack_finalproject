@@ -8,7 +8,11 @@
   border: none;
   cursor: pointer;
 }
-
+.button:disabled {
+  filter: grayscale(0.8);
+  cursor: none;
+  pointer-events: none;
+}
 .button:active {
   background-color: #A10000;
 }

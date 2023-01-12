@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import classes from "./login.module.scss";
 import {Button, TextInput} from "@spideai/my-lib/dist/cjs";
 import {useRouter} from "next/router";
@@ -6,13 +6,37 @@ import {AuthenticationContext} from "../src/context/AuthenticationContext";
 
 export const Login = () => {
     const router = useRouter()
-    const {jwt, onLogin} = useContext(AuthenticationContext)
+    const {onLogin} = useContext(AuthenticationContext)
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [disabledButton, setDisabledButton] = useState(false)
+    const [state, setState] = useState("no token")
+
+    useEffect(() => {
+        const token = localStorage.getItem('jwt') || ""
+        if (token !== "") {
+            setDisabledButton(true);
+            setState("you have a token, we check your role")
+            const checkUserRequestOptions = {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                }
+            };
+            fetch('http://localhost:8000/api/.user/user', checkUserRequestOptions)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.roles.includes("ROLE_ADMIN")) { router.push("/admin/board") }
+                    else { setDisabledButton(false) }
+                })
+        }
+    }, [])
 
     const onFormSubmit = () => {
-        onLogin({username: email, password: password})
+        setDisabledButton(true)
+        onLogin({username: email, password: password}, setState)
     }
 
     return (
@@ -26,10 +50,11 @@ export const Login = () => {
                 </div>
                 <h2>CONNEXION</h2>
                 <div className={classes.form}>
+                    <h4>{state}</h4>
                     <form>
                         <TextInput title={"Identifiant"} onChange={(e) => {setEmail(e.currentTarget.value)}}/>
                         <TextInput title={"Mot de passe"} onChange={(e) => {setPassword(e.currentTarget.value)}}/>
-                        <Button title={"Connexion"} onClick={onFormSubmit}/>
+                        <Button title={"Connexion"} onClick={onFormSubmit} disabled={disabledButton}/>
                     </form>
                 </div>
             </div>
