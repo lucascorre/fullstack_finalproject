@@ -1,5 +1,5 @@
 import classes from "./AdminPage.module.css"
-import {useContext, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import {AuthenticationContext} from "../../context/AuthenticationContext";
 
 enum Tabs {
@@ -10,10 +10,28 @@ enum Tabs {
 const AdminPage = () => {
     const {jwt} = useContext(AuthenticationContext)
     const [tab, setTab] = useState<Tabs>(Tabs.USERS)
+    const [users, setUsers] = useState<any[]>([])
     
     const onTabClick = (tab: Tabs) => {
       setTab(tab)
     }
+
+    useEffect(() => {
+        if (!jwt) alert("no token fdm")
+        fetch('http://localhost:8000/api/.user/admin/future-users', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${jwt}`
+            },
+        })
+          .then(response => response.json())
+          .then(data => {
+              setUsers((prev) => ({
+              ...prev, ...data
+              }))
+          })
+    }, [])
 
     return (
         <div className={classes.pageContainer}>
@@ -40,13 +58,17 @@ const AdminPage = () => {
                     </thead>
 
                     <tbody>
-                        <tr className={classes.tr}>
-                            <td className={classes.td}>Enabled</td>
-                            <td className={classes.td}>Mark otto</td>
-                            <td className={classes.td}>longueCoordonnéedemerde@pouette.pouette</td>
-                            <td className={classes.td}>truite</td>
-                            <td className={classes.td}>bonton</td>
-                        </tr>
+                    {
+                        users.map((user) => (
+                          <tr className={classes.tr}>
+                              <td className={classes.td}>{user.validate ? "enabled" : "disabled"}</td>
+                              <td className={classes.td}>{user.name} {user.lastname}</td>
+                              <td className={classes.td}>{user.email} {user.phone}</td>
+                              <td className={classes.td}>{user.nationality}</td>
+                              <td className={classes.td}>bonton</td>
+                          </tr>
+                        ))
+                    }
                     </tbody>
                 </table>
             </div>

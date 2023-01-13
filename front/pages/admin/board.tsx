@@ -6,6 +6,7 @@ export default function AdminBoard() {
 
     const router = useRouter();
     const [isAdmin, setIsAdmin] = useState(false);
+    // const [isAdmin, setIsAdmin] = useState(true);
 
     useEffect(() => {
         const token = localStorage.getItem('jwt') || ""
