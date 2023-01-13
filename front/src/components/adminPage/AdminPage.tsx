@@ -1,6 +1,8 @@
 import classes from "./AdminPage.module.css"
 import {useContext, useEffect, useState} from "react";
 import {AuthenticationContext} from "../../context/AuthenticationContext";
+import {removeOptionalChainingUndefinedMarkerType} from "tsutils";
+import {Button} from "@spideai/my-lib/dist/cjs";
 
 enum Tabs {
     USERS = "users",
@@ -11,6 +13,7 @@ const AdminPage = () => {
     const {jwt} = useContext(AuthenticationContext)
     const [tab, setTab] = useState<Tabs>(Tabs.USERS)
     const [users, setUsers] = useState<any[]>([])
+    const [loading, setLoading] = useState<boolean>(true)
     
     const onTabClick = (tab: Tabs) => {
       setTab(tab)
@@ -18,7 +21,7 @@ const AdminPage = () => {
 
     useEffect(() => {
         if (!jwt) alert("no token fdm")
-        fetch('http://localhost:8000/api/.user/admin/future-users', {
+        fetch('http://localhost:8000/api/.user/admin/users', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -27,12 +30,28 @@ const AdminPage = () => {
         })
           .then(response => response.json())
           .then(data => {
-              setUsers((prev) => ({
-              ...prev, ...data
-              }))
+              console.log(data)
+              setUsers(data.users)
+              setLoading(false)
           })
     }, [])
 
+    const onValidate = (idlol: string) => {
+        setLoading(true);
+        fetch(`http://localhost:8000/api/.user/admin/validate-users/${idlol}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${jwt}`
+            },
+        })
+            .then(response => response.json())
+            .then(data => {
+                setLoading(false)
+            })
+    }
+
+    if (loading) return <div>loading tamer</div>
     return (
         <div className={classes.pageContainer}>
             <h1> Gestion Backoffice</h1>
@@ -59,15 +78,21 @@ const AdminPage = () => {
 
                     <tbody>
                     {
-                        users.map((user) => (
-                          <tr className={classes.tr}>
-                              <td className={classes.td}>{user.validate ? "enabled" : "disabled"}</td>
-                              <td className={classes.td}>{user.name} {user.lastname}</td>
-                              <td className={classes.td}>{user.email} {user.phone}</td>
-                              <td className={classes.td}>{user.nationality}</td>
-                              <td className={classes.td}>bonton</td>
-                          </tr>
-                        ))
+                        users.map(({userInfo}) => {
+                            if (!userInfo) return undefined
+                            return (
+                                <tr key={userInfo.id} className={classes.tr}>
+                                    <td className={classes.td}>{userInfo.validate ? "enabled" : "disabled"}</td>
+                                    <td className={classes.td}>{userInfo.name} {userInfo.lastname}</td>
+                                    <td className={classes.td}>{userInfo.email} {userInfo.phone}</td>
+                                    <td className={classes.td}>{userInfo.nationality}</td>
+                                    <td className={classes.td}>
+                                        {!userInfo.validate ? <Button title="Verifier" onClick={() => onValidate(userInfo.id)}/>
+                                            : <Button title="Editer"/>}
+                                    </td>
+                                </tr>
+                            )
+                        })
                     }
                     </tbody>
                 </table>

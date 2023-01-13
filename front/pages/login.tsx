@@ -6,14 +6,16 @@ import {AuthenticationContext} from "../src/context/AuthenticationContext";
 
 export const Login = () => {
     const router = useRouter()
-    const {onLogin} = useContext(AuthenticationContext)
+    const {onLogin, isAdmin, isAuthenticated, loading} = useContext(AuthenticationContext)
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [disabledButton, setDisabledButton] = useState(false)
     const [state, setState] = useState("no token")
 
-
+    if (isAuthenticated && isAdmin) {
+        router.push("/admin/board")
+    }
 
     const onFormSubmit = () => {
         setDisabledButton(true)
@@ -31,7 +33,7 @@ export const Login = () => {
                 </div>
                 <h2>CONNEXION</h2>
                 <div className={classes.form}>
-                    <h4>{state}</h4>
+                    <h4>{loading ? "loading" : "not loading"}</h4>
                     <form>
                         <TextInput title={"Identifiant"} onChange={(e) => {setEmail(e.currentTarget.value)}}/>
                         <TextInput title={"Mot de passe"} onChange={(e) => {setPassword(e.currentTarget.value)}}/>
