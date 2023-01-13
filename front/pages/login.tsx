@@ -13,26 +13,7 @@ export const Login = () => {
     const [disabledButton, setDisabledButton] = useState(false)
     const [state, setState] = useState("no token")
 
-    useEffect(() => {
-        const token = localStorage.getItem('jwt') || ""
-        if (token !== "") {
-            setDisabledButton(true);
-            setState("you have a token, we check your role")
-            const checkUserRequestOptions = {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
-                }
-            };
-            fetch('http://localhost:8000/api/.user/user', checkUserRequestOptions)
-                .then(response => response.json())
-                .then(data => {
-                    if (data.roles.includes("ROLE_ADMIN")) { router.push("/admin/board") }
-                    else { setDisabledButton(false) }
-                })
-        }
-    }, [])
+
 
     const onFormSubmit = () => {
         setDisabledButton(true)

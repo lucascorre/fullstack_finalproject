@@ -31,6 +31,28 @@ const AuthenticationProvider = ({children}: AuthenticationProviderType) => {
     const router = useRouter();
     const [jwt, setJwt] = useState("")
 
+    useEffect(() => {
+        const token = localStorage.getItem('jwt') || ""
+        if (token !== "") {
+            setDisabledButton(true);
+            setJwt(token)
+            setState("you have a token, we check your role")
+            const checkUserRequestOptions = {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                }
+            };
+            fetch('http://localhost:8000/api/.user/user', checkUserRequestOptions)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.roles.includes("ROLE_ADMIN")) { router.push("/admin/board") }
+                    else { setDisabledButton(false) }
+                })
+        }
+    }, [])
+
     const onLogin = (data: LoginInfoType, setState: (txt: string) => void) => {
         const loginRequestOptions = {
             method: 'POST',
