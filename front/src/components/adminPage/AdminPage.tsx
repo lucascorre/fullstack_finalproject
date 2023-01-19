@@ -17,20 +17,33 @@ const AdminPage = () => {
     }
 
     useEffect(() => {
-        if (!jwt) alert("no token fdm")
-        fetch('http://localhost:8000/api/.user/admin/future-users', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${jwt}`
-            },
+      if (!jwt) alert("no token fdm")
+      fetch('http://localhost:8000/api/.user/admin/users', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${jwt}`
+        },
+      })
+        .then(response => response.json())
+        .then(data => {
+          setUsers((prev) => ({
+            ...prev, ...data
+          }))
         })
-          .then(response => response.json())
-          .then(data => {
-              setUsers((prev) => ({
-              ...prev, ...data
-              }))
-          })
+      fetch('http://localhost:8000/api/.user/admin/future-users', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${jwt}`
+        },
+      })
+        .then(response => response.json())
+        .then(data => {
+          setUsers((prev) => ({
+            ...prev, ...data
+          }))
+        })
     }, [])
 
     return (
