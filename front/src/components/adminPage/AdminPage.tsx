@@ -21,7 +21,7 @@ const AdminPage = () => {
 
     useEffect(() => {
         if (!jwt) alert("no token fdm")
-        fetch('http://localhost:8000/api/.user/admin/users', {
+        Promise.all([fetch('http://localhost:8000/api/.user/admin/users', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -30,10 +30,21 @@ const AdminPage = () => {
         })
           .then(response => response.json())
           .then(data => {
-              console.log(data)
-              setUsers(data.users)
+              setUsers((prev) => [...prev, ...data.users])
               setLoading(false)
-          })
+          }), fetch('http://localhost:8000/api/.user/admin/users', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${jwt}`
+            },
+        })
+          .then(response => response.json())
+          .then(data => {
+              setUsers((prev) => [...prev, ...data.users])
+          })]).then(() => {
+            setLoading(false)
+        })
     }, [])
 
     const onValidate = (idlol: string) => {
