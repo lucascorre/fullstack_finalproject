@@ -1,8 +1,12 @@
 import React, {useEffect, useState} from "react";
 import {useRouter} from "next/router";
+import {set} from "immutable";
 
 type AuthenticationContextType = {
     jwt: string
+    loading: boolean
+    isAdmin: boolean
+    isAuthenticated: boolean
     onLogin: (
         data: LoginInfoType,
         setState: (txt: string) => void,
@@ -20,6 +24,9 @@ type LoginInfoType = {
 
 const defaultAuthenticationContext = {
     jwt: "",
+    loading: true,
+    isAdmin: false,
+    isAuthenticated: false,
     onLogin: () => {},
 }
 
@@ -30,13 +37,22 @@ const AuthenticationProvider = ({children}: AuthenticationProviderType) => {
 
     const router = useRouter();
     const [jwt, setJwt] = useState("")
+    const [loading, setLoading] = useState(true)
+    const [isAdmin, setIsAdmin] = useState(false)
+    const [isAuthenticated, setIsAuthenticated] = useState(false)
 
     useEffect(() => {
         const token = localStorage.getItem('jwt') || ""
-        if (token !== "") {
-            setDisabledButton(true);
+        const admin = localStorage.getItem("isAdmin") || ""
+        if (token !== "" && admin === "true") {
             setJwt(token)
-            setState("you have a token, we check your role")
+            setLoading(false)
+            setIsAuthenticated(true)
+            setIsAdmin(true)
+            return
+        }
+        if (token !== "") {
+            setJwt(token)
             const checkUserRequestOptions = {
                 method: 'GET',
                 headers: {
@@ -47,13 +63,21 @@ const AuthenticationProvider = ({children}: AuthenticationProviderType) => {
             fetch('http://localhost:8000/api/.user/user', checkUserRequestOptions)
                 .then(response => response.json())
                 .then(data => {
-                    if (data.roles.includes("ROLE_ADMIN")) { router.push("/admin/board") }
-                    else { setDisabledButton(false) }
+                    if (data.roles.includes("ROLE_ADMIN")) {
+                        setIsAdmin(true)
+                        localStorage.setItem('isAdmin', "true")
+
+                    }
+                    setLoading(false)
+                    setIsAuthenticated(true)
                 })
+        } else {
+            setLoading(false)
         }
     }, [])
 
-    const onLogin = (data: LoginInfoType, setState: (txt: string) => void) => {
+    const onLogin = async (data: LoginInfoType) => {
+        setLoading(true)
         const loginRequestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -62,12 +86,10 @@ const AuthenticationProvider = ({children}: AuthenticationProviderType) => {
                 password: data.password
             })
         };
-        setState("Il va falloir être patient mais ça commence à essayer de te log là")
-        fetch('http://localhost:8000/api/login', loginRequestOptions)
+        return fetch('http://localhost:8000/api/login', loginRequestOptions)
             .then(response => response.json())
             .then(data => {
                 if (data.token !== undefined) {
-                    setState("Tu existe mais es tu admin? On va voir ça...")
                     const token = data.token;
                     const checkRoleRequestOptions = {
                         method: 'POST',
@@ -85,13 +107,23 @@ const AuthenticationProvider = ({children}: AuthenticationProviderType) => {
                             if (data.hasRole) {
                                 setJwt(token)
                                 localStorage.setItem('jwt', token)
-                                router.push("/admin/board")
+                                setIsAdmin(true)
+                                setLoading(false)
+                                setIsAuthenticated(true)
+                                return "success"
                             }
-                            else { router.push("/") }
+                            else {
+                                setIsAdmin(false)
+                                setJwt(token)
+                                setLoading(false)
+                                setIsAuthenticated(true)
+                                return "success"
+                            }
                         })
-
                 } else {
-                    router.push('/')
+                    setIsAuthenticated(false)
+                    setLoading(false)
+                    return "failure"
                 }
             })
     }
@@ -101,7 +133,16 @@ const AuthenticationProvider = ({children}: AuthenticationProviderType) => {
     //     setJwt(token)
     // }, [jwt])
 
-    return <AuthenticationContext.Provider value={{jwt, onLogin}}>{children}</AuthenticationContext.Provider>
+    return <AuthenticationContext.Provider
+        value={{
+            jwt,
+            onLogin,
+            loading,
+            isAdmin,
+            isAuthenticated
+    }}>
+        {children}
+    </AuthenticationContext.Provider>
 }
 
 export {AuthenticationContext, AuthenticationProvider};
