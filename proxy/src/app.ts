@@ -19,6 +19,11 @@ app.use('/api/.user', function (req, res, next) {
 });
 
 // PUBLIC ROUTES
+app.get("/", (req, res) => {
+  axios.get("http://car/").then((onfulfilled) => {
+    res.send(onfulfilled.data);
+  }).catch(e => res.send(e))
+});
 
 app.get("/api", (_, res) => {
   res.send("Hello API");

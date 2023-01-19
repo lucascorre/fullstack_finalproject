@@ -30,6 +30,7 @@ const AdminPage = () => {
         })
           .then(response => response.json())
           .then(data => {
+              console.log(data)
               setUsers((prev) => [...prev, ...data.users])
               setLoading(false)
           }), fetch('http://localhost:8000/api/.user/admin/users', {
