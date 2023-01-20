@@ -18,12 +18,50 @@ app.use('/api/.user', function (req, res, next) {
   res.sendStatus(401);
 });
 
-// PUBLIC ROUTES
+// ---------------------------------------------------------------------------------------------------------------------
+
+// CAR CRUD ROUTES
+
 app.get("/car", (req, res) => {
   axios.get("http://car:5000/").then((onfulfilled) => {
     res.send(onfulfilled.data);
   }).catch(e => res.send(e))
 });
+
+
+app.post("/car/create", (req, res) => {
+  axios.post("http://car:5000/car/create", req.body).then((onfulfilled) => {
+    res.send(onfulfilled.data);
+  }).catch(e => res.send(e))
+});
+
+app.get("/car/all", (req, res) => {
+  axios.get("http://car:5000/car/all", req.body).then((onfulfilled) => {
+    res.send(onfulfilled.data);
+  }).catch(e => res.send(e))
+});
+
+
+app.get("/car/:id", (req, res) => {
+  axios.get(`http://car:5000/car/${req.params.id}`, req.body).then((onfulfilled) => {
+    res.send(onfulfilled.data);
+  }).catch(e => res.send(e))
+});
+
+app.post("/car/:id/update", (req, res) => {
+  axios.post(`http://car:5000/car/${req.params.id}/update`, req.body).then((onfulfilled) => {
+    res.send(onfulfilled.data);
+  }).catch(e => res.send(e))
+});
+
+app.post("/car/:id/delete", (req, res) => {
+  axios.post(`http://car:5000/car/${req.params.id}/delete`, req.body).then((onfulfilled) => {
+    res.send(onfulfilled.data);
+  }).catch(e => res.send(e))
+});
+// ---------------------------------------------------------------------------------------------------------------------
+
+// PUBLIC ROUTES
 
 app.get("/api", (_, res) => {
   res.send("Hello API");
