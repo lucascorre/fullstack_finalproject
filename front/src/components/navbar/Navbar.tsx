@@ -9,7 +9,9 @@ function Navbar() {
     return (
         <div className={classes.navBar}>
             <div className={classes.nameAndLogo}>
-                <img className={classes.logo} src="/Logo.svg" alt="logo"/>
+                <a onClick={() => router.push(("/"))}>
+                    <img className={classes.logo} src="/Logo.svg" alt="logo"/>
+                </a>
                 <h1 className={classes.name}>RIDE</h1>
             </div>
             <div className={classes.links}>

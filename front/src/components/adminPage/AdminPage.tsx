@@ -13,6 +13,7 @@ const AdminPage = () => {
     const {jwt} = useContext(AuthenticationContext)
     const [tab, setTab] = useState<Tabs>(Tabs.USERS)
     const [users, setUsers] = useState<any[]>([])
+    const [futureUsers, setFutureUsers] = useState<any[]>([])
     const [loading, setLoading] = useState<boolean>(true)
 
     const onTabClick = (tab: Tabs) => {
@@ -30,10 +31,9 @@ const AdminPage = () => {
         })
           .then(response => response.json())
           .then(data => {
-              console.log(data)
               setUsers((prev) => [...prev, ...data.users])
               setLoading(false)
-          }), fetch('http://localhost:8000/api/.user/admin/users', {
+          }), fetch('http://localhost:8000/api/.user/admin/future-users', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -42,15 +42,16 @@ const AdminPage = () => {
         })
           .then(response => response.json())
           .then(data => {
-              setUsers((prev) => [...prev, ...data.users])
+              console.log(data)
+              setFutureUsers((prev) => [...prev, ...data.users])
           })]).then(() => {
             setLoading(false)
         })
     }, [])
 
-    const onValidate = (idlol: string) => {
+    const onValidate = (id: string) => {
         setLoading(true);
-        fetch(`http://localhost:8000/api/.user/admin/validate-users/${idlol}`, {
+        fetch(`http://localhost:8000/api/.user/admin/validate-users/${id}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -60,6 +61,9 @@ const AdminPage = () => {
             .then(response => response.json())
             .then(data => {
                 setLoading(false)
+                if (data.status == "success") {
+                    window.location.reload()
+                }
             })
     }
 
@@ -89,6 +93,22 @@ const AdminPage = () => {
                     </thead>
 
                     <tbody>
+                    {
+                        futureUsers.map((userInfo) => {
+                            return (
+                                <tr key={userInfo.id} className={classes.tr}>
+                                    <td className={classes.td}>{userInfo.validate ? "enabled" : "disabled"}</td>
+                                    <td className={classes.td}>{userInfo.name} {userInfo.lastname}</td>
+                                    <td className={classes.td}>{userInfo.email} {userInfo.phone}</td>
+                                    <td className={classes.td}>{userInfo.nationality}</td>
+                                    <td className={classes.td}>
+                                        {!userInfo.validate ? <Button title="Validate" onClick={() => onValidate(userInfo.id)}/>
+                                            : <Button title="Edit"/>}
+                                    </td>
+                                </tr>
+                            )
+                        })
+                    }
                     {
                         users.map(({userInfo}) => {
                             if (!userInfo) return undefined
