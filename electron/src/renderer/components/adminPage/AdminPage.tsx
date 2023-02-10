@@ -28,8 +28,7 @@ const AdminPage = () => {
     setTab(tab)
   }
 
-  useEffect(() => {
-    if (!jwt) alert("no token")
+  const fetchAll = () => {
     Promise.all([
         fetch('http://localhost:8000/api/.user/admin/users', {
           method: 'GET',
@@ -71,6 +70,12 @@ const AdminPage = () => {
     ).then(() => {
       setLoading(false)
     })
+  }
+
+
+  useEffect(() => {
+    if (!jwt) alert("no token")
+    fetchAll()
   }, [])
 
   const onValidate = (id: string) => {
@@ -127,7 +132,7 @@ const AdminPage = () => {
       .then(data => {
         setLoading(false)
         if (data.status == "success") { // TODO: clean this please Pouette it's berk'
-          window.location.reload()
+          fetchAll()
         }
       })
   }
