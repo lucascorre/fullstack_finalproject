@@ -13,7 +13,6 @@ enum Tabs {
 }
 
 const AdminPage = () => {
-  const navigate = useNavigate()
   const {jwt} = useContext(AuthenticationContext)
   const [tab, setTab] = useState<Tabs>(Tabs.USERS)
   const [users, setUsers] = useState<any[]>([])
@@ -91,7 +90,7 @@ const AdminPage = () => {
       .then(data => {
         setLoading(false)
         if (data.status == "success") {
-          window.location.reload()
+          fetchAll()
         }
       })
   }
@@ -109,7 +108,8 @@ const AdminPage = () => {
       .then(data => {
         setLoading(false)
         if (data.status == "success") { // TODO: clean this please Pouette it's berk'
-          window.location.reload()
+          fetchAll()
+          setTab(Tabs.VEHICLES)
         }
       })
   }
@@ -133,6 +133,7 @@ const AdminPage = () => {
         setLoading(false)
         if (data.status == "success") { // TODO: clean this please Pouette it's berk'
           fetchAll()
+          setTab(Tabs.VEHICLES)
         }
       })
   }
