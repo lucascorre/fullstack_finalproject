@@ -1,0 +1,32 @@
+.textInputContainer.focus-within {
+  color: #2D2D2D;
+}
+
+.textInputContainer {
+  width: 100%;
+  color: #727272;
+  margin: 0.5em;
+}
+
+input.textInput {
+  width: 100%;
+  height: 2em;
+  padding: 1.5rem 0 0 0.5em;
+  background-color: #F9F9F9;
+  border: none;
+  border-bottom: 2px solid white;
+  color: #C00000;
+}
+
+input.textInput:focus {
+  border: none;
+  border-bottom: 2px solid #000000;
+  outline: none;
+}
+
+label.label {
+  position: absolute;
+  font-weight: 600;
+  transform: translate(1rem, .5rem);
+  font-size: 13px;
+}

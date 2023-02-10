@@ -1,0 +1,17 @@
+.AppContainer {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.headerContainer {
+  flex: 2
+}
+
+.contentContainer {
+  flex: 20;
+}
+
+.footerContainer {
+  flex: 2
+}

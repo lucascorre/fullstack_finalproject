@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
+.signInPage {
+  .descriptionContainer {
+    background-size: cover;
+    width: 100%;
+    height: 424px;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: center;
+    div {
+      display: flex;
+      flex-direction: column;
+      justify-content: end;
+      align-items: center;
+      width: 70%;
+      background-color: #ffffff;
+      font-size: 18px;
+      margin: 0;
+      p {
+        margin: 16px 43px;
+        text-align: left;
+        span {
+          color: #C00000;
+        }
+      }
+      hr {
+        margin: 0;
+        border: #C00000 1px solid;
+        width: 95%;
+      }
+    }
+  }
+
+  .signInFormContainer {
+    background-color: white;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    .form {
+      width: 70%;
+      text-align: left;
+      margin-bottom: 5em;
+      h2 {
+        font-family: 'Roboto', serif;
+        font-style: normal;
+        font-weight: 800;
+        font-size: 21px;
+        line-height: 25px;
+        color: #C00000;
+      }
+    }
+  }
+}
+
+fieldset.fieldset {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  border: none;
+  div {
+    margin-right: 5em;
+    input {
+      accent-color: #000000;
+    }
+  }
+}
+
+
+.inputContainer {
+  display: flex;
+  margin-top: 1em;
+  width: 25rem;
+}
+
+.inputGroup {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.iAttest {
+  margin-top: 1em;
+  margin-left: 0.5em;
+  input {
+    margin-right: 1em;
+  }
+}
+
+.submitButtonContainer {
+  margin-top: 1em;
+  display: flex;
+  justify-content: flex-end;
+}
