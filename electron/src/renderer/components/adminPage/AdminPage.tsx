@@ -28,6 +28,7 @@ const AdminPage = () => {
   }
 
   const fetchAll = () => {
+    setUsers([])
     Promise.all([
         fetch('http://localhost:8000/api/.user/admin/users', {
           method: 'GET',
