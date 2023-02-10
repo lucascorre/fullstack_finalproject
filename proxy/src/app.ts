@@ -13,24 +13,30 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
 
+// Check if Token bearer in request for /.user routes
 app.use('/api/.user', function (req, res, next) {
   if (req.header('Authorization')) { next(); return }
   res.sendStatus(401);
 });
+// Check if user is admin for car CRUD
+// app.use('/car/admin', function (req, res, next) {
+//   const bearer = req.header('Authorization');
+//   axios.post("http://nginx/api/user/check-role", {"role": "ROLE_ADMIN"}, {headers: {'Authorization': bearer}}).then((onfulfilled) => {
+//     res.send(onfulfilled.data);
+//     if (res.get('hasRole')) {
+//       next();
+//       return
+//     }
+//   }).catch(e => res.send(e))
+//   res.sendStatus(401);
+// });
 
 // ---------------------------------------------------------------------------------------------------------------------
 
 // CAR CRUD ROUTES
 
-app.get("/car", (req, res) => {
+app.get("/car/hello", (req, res) => {
   axios.get("http://car:5000/").then((onfulfilled) => {
-    res.send(onfulfilled.data);
-  }).catch(e => res.send(e))
-});
-
-
-app.post("/car/create", (req, res) => {
-  axios.post("http://car:5000/car/create", req.body).then((onfulfilled) => {
     res.send(onfulfilled.data);
   }).catch(e => res.send(e))
 });
@@ -48,13 +54,19 @@ app.get("/car/:id", (req, res) => {
   }).catch(e => res.send(e))
 });
 
-app.post("/car/:id/update", (req, res) => {
+app.post("/car/admin/create", (req, res) => {
+  axios.post("http://car:5000/car/create", req.body).then((onfulfilled) => {
+    res.send(onfulfilled.data);
+  }).catch(e => res.send(e))
+});
+
+app.post("/car/admin/:id/update", (req, res) => {
   axios.post(`http://car:5000/car/${req.params.id}/update`, req.body).then((onfulfilled) => {
     res.send(onfulfilled.data);
   }).catch(e => res.send(e))
 });
 
-app.post("/car/:id/delete", (req, res) => {
+app.post("/car/admin/:id/delete", (req, res) => {
   axios.post(`http://car:5000/car/${req.params.id}/delete`, req.body).then((onfulfilled) => {
     res.send(onfulfilled.data);
   }).catch(e => res.send(e))

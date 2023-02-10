@@ -49,3 +49,7 @@ th.th {
 td.td {
     padding: .5rem;
 }
+
+.tableImage {
+    width: 2.5em;
+}

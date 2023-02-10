@@ -24,7 +24,7 @@ def createCar():
     car = CarModel(name=name, price=price, image = image)
     db.session.add(car)
     db.session.commit()
-    return jsonify(car.to_json())
+    return jsonify({"status": "success", "car": car.to_json()})
  
 @app.route('/car/all')
 def readAllCar():
@@ -62,7 +62,7 @@ def deleteOneCar(id):
         if car:
             db.session.delete(car)
             db.session.commit()
-            return jsonify({"DELETE": "Success"})
+            return jsonify({"status": "success"})
         abort(404)
 
 
